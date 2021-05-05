@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Vacation Planner</title>
+
+  
+  <link rel="stylesheet" href="
+  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="pstyle.css">
+
+</head>
+<body>
+
+<div class="row">
+  <div class="col-25">
+  	<br>
+    <div class="container"> 
+    	<h2>PAYMENT GATEWAY</h2>
+      <form action="PaymentServlet" method="POST">
+      
+        <div class="row">
+          <div class="col-25">
+
+            Accepted Cards:
+            <div class="icon-container" style="margin-top:1px;">&nbsp;&nbsp;
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cardHolder">Card Holder Name</label>
+            <input type="text" id="cdhldr" name="cdholder" required>
+
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" required>
+
+            <label for="expmonth">Expiry Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="April" required>
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Expiry Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2000" pattern="202[1-9]" required>
+              </div>
+              <div class="col-25">
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" name="cvv" placeholder="CVV" pattern="[0-9][0-9][0-9]" required>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+       	<br>
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+      <br>
+    </div>
+  </div>
+</div>
+</body>
+</html>

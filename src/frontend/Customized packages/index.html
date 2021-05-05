@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form HTML Template</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body >
+
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-md-push-5">
+						<div class="booking-cta">
+							<h1>Customize your own package</h1>
+							<p>Customized holiday tour packages has its root in the desire you always have to ensconce yourself and your closed ones and soak in nature with no one in vicinity. Whether you love snow capped mountains or the tropical beaches fascinate you, indulge in your desires.Craft your entire holiday, exactly the way you want!
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-pull-7">
+						<div class="booking-form">
+							<form id = "custForm" action="postCustForm">
+
+								<div class="form-group">
+									<span class="form-label">Your Package Name</span>
+									<input class="form-control" type="text" placeholder="Give your package the name you wish" name="packname" value="" id="packname" required>
+									<!-- <input class="form-control" type="text" placeholder="Enter a destination or hotel name"> -->
+								</div>
+								<div class="form-group">
+									<span class="form-label">Your Destination</span>
+									<input class="form-control" type="text" list="select" name="destination" placeholder="destination" value="" id="destinput" required>
+									 <datalist id="select">
+									 </datalist>
+									<!-- <input class="form-control" type="text" placeholder="Enter a destination or hotel name"> -->
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Start Date</span>
+											<input class="form-control" name="date" type="date" min="2021-04-26" max="2021-07-26" required>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Days</span>
+													<select class="form-control" name="days" id="days" value="1" required>
+													  <option value="1">1</option>
+													  <option value="2">2</option>
+													  <option value="3">3</option>
+													  <option value="4">4</option>
+													  <option value="5">5</option>
+													  <option value="6">6</option>
+													  <option value="7">7</option>
+													</select>
+													<br>
+										</div>
+									</div>
+									<div>
+									
+										
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<span class="form-label">Adults</span>
+											<select class="form-control" id="adults" name="adults">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<span class="form-label">Children</span>
+											<select class="form-control" id="children" name="children" >
+												<option>0</option>
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-btn">
+									<button type="button" id = "daysbutton" onclick="getActivities();window.location='#dayactDiv';" class="submit-btn">Select Activities</button>
+									<br>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<h1 style="font-size:35px;font-family:courier;font-weight : Bold;">Choose Activities</h1>
+	<br>
+	<div id="dayactDiv" style="width: 800px;height: 200px;">
+	</div>
+<!-- 	<div id = "submitDiv" >
+		<button id="submit" onclick="window.location.href='payment.html'" >SUBMIT</button>
+	</div> -->
+	
+</form>
+
+
+<!-- <form id = "custForm" action="postCustForm">
+	<div id="destination" >
+		<h3>Enter Destination: </h3>
+		 <input type="text" list="select" name="destination" value="" id="destinput" required>
+		 <datalist id="select">
+		 </datalist>
+	</div>
+	<div id = "daysDiv">
+		<h3>Enter Days: </h3>
+		<select name="days" id="days" value="1" required>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+		  <option value="7">7</option>
+		</select>
+		<button type="button" id = "daysbutton" onclick="getActivities()">Display Activites</button>
+	</div>
+	<div id = "startDate">
+		<h3>Start Date: </h3>
+		<input type="date" name="date" min="2021-04-26" max="2021-07-26" required>
+	</div>
+	<div id = "adultsDiv">
+		<h3>Adults(12y+): </h3>
+		<input type="number" id="adults" name="adults" min="1" max="9" required>
+	</div>
+	<div id = "childrenDiv">
+		<h3>Children(2y-12y): </h3>
+		<input type="number" id="children" name="children" min="1" max="6" required>
+	</div>
+	<div id="dayactDiv">
+		<h3>Activities</h3>
+
+	</div>
+	<div id = "submitDiv">
+		<h3>SUBMIT: </h3>
+		<input type="submit" id="submit" onclick="window.location.href='payment.html'">
+	</div>
+
+	
+</form> -->
+
+<p id="dummy"></p>
+
+<script>
+
+	window.onload=function getDestList(){
+	var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.status == 200) {
+          var val = xhttp.responseText;
+          document.getElementById("select").innerHTML=val;  
+	  }
+    };
+    xhttp.open("GET", "getCustDestinations", true);
+    xhttp.send();
+}
+
+function getActivities(){
+	val = document.getElementById("destinput").value;
+	var nodays = document.getElementById("days").value;
+	if(val=="" || nodays==""){
+		alert("Enter destination");
+		return;
+	}
+	// window.location.href="getActivities?val="+val;
+	var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.status == 200) {
+          var myObj = xhttp.responseText; 
+          var jsonObj = JSON.parse(myObj);
+          // document.getElementById("dummy").innerHTML= myObj;
+          // jsonObj.packages[0].ActivityName; 
+	      displayActivities(jsonObj);
+	  }
+    };
+    xhttp.open("GET", "getActivities?val="+val, false);
+    xhttp.send();
+
+}
+
+function displayActivities(jsonObj){
+
+	var mainactdiv = document.getElementById("dayactDiv");
+	mainactdiv.innerHTML="";
+
+	for(i=0;i<document.getElementById("days").value;i++){
+
+		var dayno = i+1;
+		var dayactDiv = document.createElement("div");
+		dayactDiv.setAttribute('class','dayClass');
+
+		var pdayno = document.createElement("p");
+        pdayno.setAttribute("class","dayno");
+        pdayno.appendChild(document.createTextNode("DAY "+dayno));
+        dayactDiv.appendChild(pdayno);
+
+
+		var innerdayDiv = document.createElement("div");
+		innerdayDiv.setAttribute('class','innerdayClass');
+		innerdayDiv.setAttribute('id','innerday'+dayno);
+		innerdayDiv.style.display = 'none';
+
+		var button = document.createElement("button");
+		button.innerHTML="SHOW";
+		button.setAttribute('type','button');
+		button.setAttribute('id','hideshow'+dayno);
+		
+
+
+		for(j=0;j<jsonObj.packages.length;j++){
+
+			var activitydiv = document.createElement("div");
+			activitydiv.setAttribute('class','activityClass');
+			// activitydiv.setAttribute('id','activityid');
+
+			var br = document.createElement("br");
+
+			var img = document.createElement("img");
+            img.class ="actimageClass";
+            img.setAttribute("src","custImages/"+jsonObj.packages[j].DestName+"/"+jsonObj.packages[j].ActivityName+".PNG");
+            img.setAttribute("width","400px");
+            img.setAttribute("height","200px");
+            activitydiv.appendChild(img);
+            activitydiv.appendChild(br);
+
+
+            var descdiv = document.createElement("div");
+            descdiv.setAttribute("class","actdesc");
+            // descdiv.setAttribute('id','descid');
+
+            var paname = document.createElement("p");
+            paname.setAttribute("class","aname");
+            paname.appendChild(document.createTextNode(jsonObj.packages[j].ActivityName));
+            descdiv.appendChild(paname);
+            descdiv.appendChild(br);
+
+            var pdesc = document.createElement("p");
+            pdesc.setAttribute("class","adescription");
+            pdesc.appendChild(document.createTextNode(jsonObj.packages[j].desc));
+            descdiv.appendChild(pdesc);
+            descdiv.appendChild(br);
+
+            var pduration = document.createElement("p");
+            pduration.setAttribute("class","aduration");
+            pduration.appendChild(document.createTextNode("DURATION : "+jsonObj.packages[j].duration));
+            descdiv.appendChild(pduration);
+            descdiv.appendChild(br);
+
+            var pcost = document.createElement("p");
+            pcost.setAttribute("class","acost");
+            pcost.appendChild(document.createTextNode("COST PER PERSON : "+jsonObj.packages[j].AcitivityCost));
+            descdiv.appendChild(pcost);
+            descdiv.appendChild(br);
+
+            activitydiv.appendChild(descdiv);
+            activitydiv.appendChild(br);
+
+            var input = document.createElement("select");
+            input.setAttribute("class","actselect");
+            input.setAttribute("name","DAY"+dayno+jsonObj.packages[j].ActivityName);
+            input.setAttribute('id',"DAY"+dayno+jsonObj.packages[j].ActivityName);
+            input.setAttribute('value','unselected');
+			
+			input.setAttribute('form','custForm');
+			
+
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            option1.setAttribute("value",'unselected');
+            option2.setAttribute("value",'selected');
+
+            option1.appendChild(document.createTextNode('unselected'));
+            option2.appendChild(document.createTextNode('selected'));
+
+            input.appendChild(option1);
+            input.appendChild(option2);
+
+            activitydiv.appendChild(input);
+            activitydiv.appendChild(br);
+
+            innerdayDiv.appendChild(activitydiv);
+            innerdayDiv.appendChild(br);
+
+
+		}
+
+		dayactDiv.appendChild(innerdayDiv);
+		button.setAttribute('onclick','show_hide(\'innerday'+dayno+'\')');
+		dayactDiv.appendChild(button);
+		mainactdiv.appendChild(dayactDiv);
+	}
+
+	if(document.getElementById("input")){
+		return;
+	}
+
+	var br = document.createElement("br");
+	mainactdiv.appendChild(br);
+
+	var formdiv = document.getElementById("custForm");
+	var newdiv = document.createElement("div");
+	newdiv.setAttribute("id","submitDiv");
+	var newbutton = document.createElement("button");
+	newbutton.setAttribute("id","input");
+	newbutton.setAttribute("form","custForm");
+	newbutton.setAttribute('class','submit-btn');
+	newbutton.setAttribute('type','button');
+	newbutton.setAttribute('onclick','checkActivityNull()');
+	// newbutton.onclick="checkActivityNull();";
+	newbutton.innerHTML="SUBMIT";
+	newdiv.appendChild(newbutton);
+	formdiv.appendChild(newdiv)
+
+
+}
+
+function checkActivityNull(){
+	var formElements=document.getElementById("custForm").elements;    
+	var postData={};
+	var days = document.getElementById("days").value;
+	var activitiesPerDay = [];
+	for(j=0;j<days;j++){
+		activitiesPerDay[j]=0;
+	}
+	for (var i=6; i<formElements.length; i++)
+    	if (formElements[i].type!="submit" && formElements[i].type!="button")//we dont want to include the submit-buttom
+        	postData[formElements[i].name]=formElements[i].value;
+	
+	for(var item in postData){
+		if(postData[item]=="selected")
+				activitiesPerDay[Number(item[3])-1]+=1;
+	}
+
+	var status =0,i;
+	for(i=0;i<days;i++){
+
+		if(activitiesPerDay[i]>5){
+			status = 2;
+			break;
+		}
+		
+		if(activitiesPerDay[i]==0){
+			status=1;
+			break;
+		}
+
+
+	}
+
+	if(status==1){
+		alert("Oops!! We can't find any activity picked for day "+(i+1));
+		return;
+	}
+
+	if(status==2){
+		alert("OOPS!! ACTIVITIES FOR DAY "+(i+1)+" EXCEEDED 5!!");
+		return;
+	}
+
+	for (var i=0; i<6; i++)
+    	if (formElements[i].type!="submit" && formElements[i].type!="button"){
+			if(formElements[i].value==""){
+				alert("Oops! We don't have all the details to create your package! Fill in the details!!");
+				return;
+			}
+		}
+        	
+
+	document.getElementById("custForm").submit();
+	// var dummy = document.getElementById("dummy");
+	// dummy.innerHTML = JSON.stringify(postData);
+	// alert(JSON.stringify(postData).length);
+}
+
+function show_hide(innerdayDiv){
+
+	var dayno = innerdayDiv.slice(innerdayDiv.length - 1);
+	var button = document.getElementById('hideshow'+dayno);
+	var element = document.getElementById(innerdayDiv);
+	if(element.style.display == 'none'){
+		element.style.display = 'block';
+		button.innerHTML="HIDE";
+	}
+	else{
+		element.style.display = 'none';
+		button.innerHTML="SHOW";
+	}
+}
+
+</script>
+
+<style type="text/css">
+	
+.innerdayClass{
+	padding:10px;
+	font-family : courier;
+	border: 5px solid black;
+	border-radius : 10px;
+	margin : 20px;
+	/*background-color : grey; */
+}
+
+.aname{
+	font-size : 30px;
+	font-weight : Bold;
+}
+
+.actdesc{
+	width : 650px;
+	padding : 60px;
+	border: 5px solid black;
+	border-radius : 10px;
+	margin-left: 700px;
+	margin-top: -300px;
+	cursor: pointer;
+}
+
+.actimageClass{
+	width:600px;
+	height:30px;
+	border: 5px solid black;
+	border-radius : 10px;
+	margin-left:-900px;
+}
+
+.activityClass{
+	border: 5px solid black;
+	border-radius : 10px;
+	margin:10px;
+}
+
+.dayno{
+	font-size : 30px;
+	font-weight : Bold;
+	font-family: courier;
+}
+</style>
+
+ </body>
+</html>
+

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Vacation Planner</title>
+	<link href="browseStyle.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="vscript.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	 crossorigin="anonymous">
+	 
+	<style>
+	
+	* {box-sizing: border-box}
+	.mySlides1{display: none}
+	img {vertical-align: middle;}
+
+	/* Slideshow container */
+	.slideshow-container 
+	{
+		max-width: 1000px;
+		position: relative;
+		margin: auto;
+	}
+	
+	/* Next & previous buttons */
+	.prev, .next 
+	{
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		width: auto;
+		padding: 16px;
+		margin-top: -22px;
+		color: white;
+		font-weight: bold;
+		font-size: 18px;
+		transition: 0.6s ease;
+		border-radius: 0 3px 3px 0;
+		user-select: none;
+	}
+
+	/* Position the "next button" to the right */
+	.next 
+	{
+		right: 0;
+		border-radius: 3px 0 0 3px;
+	}
+
+	/* On hover, add a grey background color */
+	.prev:hover, .next:hover 
+	{
+		background-color: #f1f1f1;
+		color: black;
+	}
+</style>
+ 
+</head>
+
+<body onload="loadDoc();checkLog();">
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> 
+			<img src="logo.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top"> Exploriana</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <div class="navbar-nav">
+        <div class="nav-link" id="welcome" style="margin-left:auto;margin-right:auto;position:absolute;left:700px;"></div>
+        <a class="nav-link" id="login" href="login.html" style="margin-left:1200px">Login</a>
+        <a class="nav-link" id="logout" href="LogoutServlet"></a>
+    
+    </div>
+			</div>
+		</div>
+	</nav>
+	
+	<nav>
+	<ul id='menu'>
+    <li><a class='prett' href='#' title='Menu'>Filter</a>
+      <ul class='menus'>
+        <li class='has-submenu'><a class='prett' href='Dropdown 1' title='Dropdown 1'>Destination</a>
+          <ul id = "destlist" class='submenu'>
+          </ul>
+        </li>
+		<li class='has-submenu'><a class='prett' href='Dropdown 1' title='Dropdown 1'>Duration - Nights</a>
+          <ul id = "durlist" class='submenu'>
+            <li><a href="#" class="duroptions" title="Sub Menu">1</a></li>
+            <li><a href="#" class="duroptions" title="Sub Menu">2</a></li>
+            <li><a href="#" class="duroptions" title="Sub Menu">3</a></li>
+			<li><a href="#" class="duroptions" title="Sub Menu">4</a></li>
+			<li><a href="#" class="duroptions" title="Sub Menu">5</a></li>
+			<li><a href="#" class="duroptions" title="Sub Menu">6</a></li>
+			<li><a href="#" class="duroptions" title="Sub Menu">7</a></li>
+			<li><a href="#" class="duroptions" title="Sub Menu">8</a></li>
+          </ul>
+        </li>
+        <li id ="budget"><a href='#' title='Dropdown 3'>Budget</a>
+			<div id="ranger">
+			<nav>
+			<div data-role="page">
+				<div data-role="header">
+				</div>
+				<div data-role="main" class="ui-content">
+					<form onsubmit="return false">
+					<div data-role="rangeslider">
+						<label for="price-min">Price:</label>
+						<input type="range" name="price-min" id="price-min" value="10000" min="10000" max="50000">
+						<label for="price-max">Price:</label>
+						<input type="range" name="price-max" id="price-max" value="20000" min="10001" max="100000">
+					</div>
+					<input id="pricesubmit" type="submit" data-inline="true" value="Submit">
+					</form>
+				</div>
+			</div>
+			</nav>
+			</div>
+		</li>
+      </ul>
+    </li>
+	</ul>
+	</nav>
+	
+	<center><h1 style="font-size:30px;font-family:courier;">Browse Package</h1><center>
+	<div id="myDiv">
+	</div>
+	
+	<div id="random"></div>
+	<p id="dummy"></p>
+	<p id="json"></p>
+	
+	<script>
+	
+	function loadDoc() {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.status == 200) {
+	    var myObj = this.responseText;
+	    var jsonObj = JSON.parse(myObj);
+	    display(jsonObj);
+	    getDestList();
+	    var pricebutton = document.getElementById("pricesubmit");
+	    pricebutton.setAttribute("onclick","getPricePackages()");
+	  }
+	};
+
+	xmlhttp.open("GET", "browsePackage", false);
+	xmlhttp.send();
+	}
+
+	function getDestList(){
+	var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.status == 200) {
+          var val = xhttp.responseText;
+          document.getElementById("destlist").innerHTML=val;
+          var x, y, i;
+		  x = document.querySelectorAll(".destoptions");
+		  for (i = 0; i < x.length; i++) {
+		    x[i].setAttribute('onclick', "getDestPackages(\""+x[i].innerHTML+"\");return false;");
+		  }  
+		  y = document.querySelectorAll(".duroptions");
+		  for (j = 0; j < y.length; j++) {
+		    y[j].setAttribute('onclick', "getDaysPackages(\""+y[j].innerHTML+"\");return false;");
+		  }  
+	  }
+    };
+    xhttp.open("GET", "getDest", true);
+    xhttp.send();
+}
+
+function getDaysPackages(val){
+
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.status == 200) {
+	    var myObj = this.responseText;
+	    var jsonObj = JSON.parse(myObj);
+	    display(jsonObj);
+	    // var jsonObj = JSON.parse(myObj);
+
+	  }
+	};
+	xmlhttp.open("GET", "getDaysPackage?nights="+val, false);
+	xmlhttp.send();
+
+}
+
+function getPricePackages(){
+	var from = document.getElementById('price-min').value;
+	var to = document.getElementById('price-max').value;
+	alert(from);
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.status == 200) {
+	    var myObj = this.responseText;
+	    var jsonObj = JSON.parse(myObj);
+	    display(jsonObj);
+	    document.getElementById("dummy").innerHTML = myObj;
+	  }
+	};
+	xmlhttp.open("GET", "getPricePackage?from="+from+"&to="+to, false);
+	xmlhttp.send();
+}
+
+function getDestPackages(val){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.status == 200) {
+	    var myObj = this.responseText;
+	    var jsonObj = JSON.parse(myObj);
+	    display(jsonObj);
+	     // document.getElementById("dummy").innerHTML = myObj;
+
+	  }
+	};
+	xmlhttp.open("GET", "getDestPackage?val="+val, false);
+	xmlhttp.send();
+}
+
+	function display(myObj)
+	{
+		var jsonObj = myObj;
+		document.getElementById("myDiv").innerHTML="";
+		if(jsonObj.packages.length==0)
+		{
+			var name = document.createElement("p");
+			var msg = document.createTextNode("No Packages Found");
+			name.appendChild(msg);
+			document.getElementById("myDiv").appendChild(name);
+		}
+		for(i=0;i<jsonObj.packages.length;i++)
+		{
+
+			var name = document.createElement("div");
+			name.setAttribute('class','name');
+			
+			var input1 = document.createTextNode(jsonObj.packages[i].vpackage);
+			name.appendChild(input1);
+
+			var desc = document.createElement("div");
+			desc.setAttribute('class','desc');
+			
+			var input2 = document.createTextNode(jsonObj.packages[i].desc);
+			desc.appendChild(input2);
+			
+			var element = document.getElementById("myDiv");
+			element.appendChild(document.createElement("br"));
+			
+			var name_desc = document.createElement("div");
+			url = "DisplayPackage.html" + "?val=" + jsonObj.packages[i].vpackage;
+    		name_desc.setAttribute("onclick","window.location.href=\'"+url+"\';");
+			name_desc.appendChild(name);
+			name_desc.appendChild(desc);
+
+			var img = document.createElement("img");
+ 
+			img.src = "images2/"+jsonObj.packages[i].vpackage + "/" + jsonObj.packages[i].vpackage + ".jpg" ;
+			img.setAttribute('class','img');
+			
+			var final_div = document.createElement("div");
+			
+			final_div.setAttribute('class','final_div');
+			
+			final_div.appendChild(img);
+			final_div.appendChild(name_desc);
+			
+			element.setAttribute('class','element');
+			
+			name_desc.setAttribute('class','name_desc');
+			
+			element.appendChild(final_div);	
+
+		}
+		element.appendChild(document.createElement("br"));
+		// url = "displayPackage.html" + "?val=" + document.getElementById("name").innerHTML;
+		// document.getElementById("name").href = url;
+	}
+	</script>
+	
+	<footer class="bg-medium text-center text-lg-start">
+	<!-- Copyright -->
+	<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);"> © 2021 Copyright <br><br>
+    Contact Us:<a class="text-dark" href="#">9653478513</a>
+    <ul class="list-unstyled">
+      <li>
+        <a href="FAQ.html" class="text-dark">FAQ</a>
+      </li>
+    </ul>
+	</div>
+	<!-- Copyright -->
+	</footer>
+	
+</body>
+</html>
